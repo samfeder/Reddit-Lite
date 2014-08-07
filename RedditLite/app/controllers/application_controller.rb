@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   def sign_in(user)
     user.reset_session_token!
-    session[:session_token] = user.session_token[:session_token]
+    session[:session_token] = user.session_token
   end
 
   def sign_out
@@ -22,7 +22,15 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
-  def require_signed_in
+  def require_ownership!
+    if Sub.find(params[:id]).moderator != current_user
+      flash.now[:errors] = ["Must be moderator to perform that action"]
+      redirect_to sub_url(params[:id])
+    end
+  end
+
+
+  def require_signed_in!
     redirect_to new_session_url if !signed_in?
   end
 end

@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
                 user_params[:password])
     if user
       sign_in(user)
-      redirect_to posts_url
+      redirect_to subs_url
     else
       flash.now[:errors] = ["Invalid Username/Password Combination."]
       render :new

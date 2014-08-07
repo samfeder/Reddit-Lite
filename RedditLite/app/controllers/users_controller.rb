@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to posts_url
+      redirect_to subs_url
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new

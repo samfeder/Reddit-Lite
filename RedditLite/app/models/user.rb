@@ -8,6 +8,11 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
+  has_many :moderated_subs,
+  class_name: "Sub",
+  foreign_key: :moderator_id,
+  primary_key: :id
+
   def self.find_by_credentials(username, password)
     user = User.find_by_username(username)
     user && user.is_password?(password) ? user : nil

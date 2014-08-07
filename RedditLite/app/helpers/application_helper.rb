@@ -3,11 +3,11 @@ module ApplicationHelper
   def form_errors
     return unless flash.now[:errors]
     html = ""
-    flash.now[:errors].each do |error|
+    flash[:errors].each do |error|
       html += error + "<br>"
     end
 
-    html
+    html.html_safe
   end
 
   def auth_token
