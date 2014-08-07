@@ -1,0 +1,18 @@
+<%= @comment.content %><br>
+<%= @comment.author.username%><br>
+<%= render "comment", comment: @comment %>
+
+Add Nested Comment
+<form action="<%= comments_url %>" method="post">
+  <%= auth_token %>
+
+  <input type="hidden"
+         value="<%= params[:id] %>"
+         name="comment[parent_comment_id]">
+
+  <label for="content">Content</label>
+  <textarea id="content" name="comment[content]"></textarea>
+
+  <input type="submit" value="Add Comment">
+</form>
+

@@ -3,6 +3,7 @@
 <% value = post.persisted? ? "Edit Post" : "Create Post" %>
 
 <%= form_errors %>
+
 <form action="<%= action %>" method="post">
   <%= auth_token %>
 
@@ -27,7 +28,19 @@
 
   <label for="content">Content</label><br><br>
   <textarea id="content"><%= post.content %></textarea>
-<br>
+  <br>
+
+  Subs
+  <% Sub.all.each do |sub| %>
+    <label><input
+        type="checkbox"
+        name="post[sub_ids][]"
+        value="<%= sub.id %>"
+        <%= "checked" if post.subs.include?(sub) %>>
+        <%= sub.title %>
+    </label>
+  <% end %>
+
   <input type="submit" value="<%= value %>">
 
 </form>

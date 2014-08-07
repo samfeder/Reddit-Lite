@@ -11,7 +11,8 @@ class PostsController < ApplicationController
 
   def create
     @sub = Sub.find(params[:sub_id])
-    @post = @sub.posts.new(post_params)
+    @post = Post.new(post_params)
+    @post.sub_ids = post_params[:sub_ids]
     @post.author = current_user
     if @post.save
       redirect_to post_url(@post)
@@ -44,12 +45,14 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    # @all_comments = @post.comments.includes(:author)
+    @all_comments = @post.comments_by_parent_id
     render :show
   end
 
   private
   def post_params
-    params.require(:post).permit(:title, :url, :content)
+    params.require(:post).permit(:title, :url, :content, sub_ids: [])
   end
 
 

@@ -1,0 +1,11 @@
+<ul>
+<% comment.child_comments.each do |c| %>
+  <li><%= c.content %><br></li>
+  Author: <%= c.author.username %><br></li>
+  Created at: <%= c.created_at %><br>
+  <a href="<%= comment_url(c) %>">Add Nested Comment</a><br><br>
+  <% if c.child_comments %>
+    <%= render "comments/comment", comment: c %>
+  <% end %>
+<% end %>
+</ul>

@@ -4,6 +4,7 @@
 <%= button_to "Create Post", new_sub_post_url(@sub), method: :get %>
 <% end %>
 
+<h2>Posts</h2>
 <% @sub.posts.each do |post| %>
 <h3><%= link_to "#{post.title}", post_url(post) %></h3>
 <% end %>
