@@ -22,10 +22,17 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
-  def require_ownership!
+  def require_sub_ownership!
     if Sub.find(params[:id]).moderator != current_user
       flash.now[:errors] = ["Must be moderator to perform that action"]
       redirect_to sub_url(params[:id])
+    end
+  end
+
+  def require_post_ownership!
+    if Post.find(params[:id]).author != current_user
+      flash.now[:errors] = ["Must be author to perform that action"]
+      redirect_to post_url(params[:id])
     end
   end
 

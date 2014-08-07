@@ -1,0 +1,33 @@
+<% action = post.persisted? ? post_url(post) : sub_posts_url(sub) %>
+<% method = post.persisted? ? "put" : "post" %>
+<% value = post.persisted? ? "Edit Post" : "Create Post" %>
+
+<%= form_errors %>
+<form action="<%= action %>" method="post">
+  <%= auth_token %>
+
+  <input
+    type="hidden"
+    name="_method"
+    value="<%= method %>" %>
+
+  <label for="title">Title</label><br>
+  <input
+    id="title"
+    type="text"
+    name="post[title]"
+    value="<%= post.title %>"><br>
+
+  <label for="url">URL</label><br>
+  <input
+    id="url"
+    type="text"
+    name="post[url]"
+    value="<%= post.url %>"><br>
+
+  <label for="content">Content</label><br><br>
+  <textarea id="content"><%= post.content %></textarea>
+<br>
+  <input type="submit" value="<%= value %>">
+
+</form>

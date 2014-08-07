@@ -5,7 +5,7 @@
 
 
 <% @subs.each do |sub| %>
-<h1><%= link_to "#{sub.title}", sub_url(sub) %></h1><br>
-<h2><%= sub.description %></h2><br>
+<h2><%= link_to "#{sub.title}", sub_url(sub) %></h2>
+<h3><%= sub.description %></h3>
 <br>
 <% end %>

@@ -1,10 +1,16 @@
 <h1><%= @sub.title %></h1>
-<h2><%= @sub.description %></h2>
+<h3><%= @sub.description %></h3>
+<% if signed_in? %>
+<%= button_to "Create Post", new_sub_post_url(@sub), method: :get %>
+<% end %>
 
-<!--show posts here -->
+<% @sub.posts.each do |post| %>
+<h3><%= link_to "#{post.title}", post_url(post) %></h3>
+<% end %>
 
+<br><br>
 <%= link_to "All Subs", subs_url %>
-<% if @sub.moderator_id == current_user.id %>
+<% if signed_in? && @sub.moderator_id == current_user.id %>
   <%= link_to "Edit Sub", edit_sub_url(@sub) %>
   <%= button_to "Delete Sub", sub_url(@sub), method: :delete %>
 <% end %>

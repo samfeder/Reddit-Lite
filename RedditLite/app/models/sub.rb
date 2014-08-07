@@ -8,4 +8,6 @@ class Sub < ActiveRecord::Base
   foreign_key: :moderator_id,
   primary_key: :id
 
+  has_many :posts
+
 end

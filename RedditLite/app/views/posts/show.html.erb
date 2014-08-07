@@ -1,0 +1,9 @@
+<h3><%= link_to "#{@post.sub.title}", sub_url(@post.sub) %></h3><br>
+<h1><%= @post.title %></h1><br>
+<span><%= @post.url %></span><br>
+<span><%= @post.content %></span><br>
+
+<% if signed_in? && @post.author_id == current_user.id %>
+  <%= link_to "Edit Post", edit_post_url(@post) %>
+  <%= button_to "Delete Post", post_url(@post), method: :delete %>
+<% end %>

@@ -1,5 +1,5 @@
 class SubsController < ApplicationController
-  before_action :require_ownership!, only: [:update, :edit, :destroy]
+  before_action :require_sub_ownership!, only: [:update, :edit, :destroy]
   before_action :require_signed_in!, except: [:show, :index]
   def new
     @sub = Sub.new
